@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14.2
+    container_name: "psqldb"
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpw
+      POSTGRES_DB: mydb
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes: 
+      - "./data:/var/lib/postgresql/data"
+      - "./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql"
+    ports: 
+      - "5432:5432"
